@@ -1,10 +1,14 @@
 
 ### Before starting an application create an .env file and copy paste the below content 
+
+```
 DB_URI=mongodb://localhost:27017/
 MONGODB_DATABASE=notes-db
 KC_HOST=http://localhost:9080
 SERVER_PORT=3001
 FRONTEND_URL=http://localhost:3000
+```
+
 
 
 ### Start Application
