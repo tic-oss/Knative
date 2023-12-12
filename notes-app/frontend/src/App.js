@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar.js";
 import socketIO from "socket.io-client";
 import { useToast } from "@chakra-ui/react";
 import Dashboard from "./Dashboard.js";
@@ -38,32 +38,32 @@ function App() {
     }
   }, [auth.isAuthenticated]);
 
-  // useEffect(() => {
-  //   if (schedules.length > 0) {
-  //     socket.on(auth?.user?.profile?.sub, (data) => {
-  //       console.log(data, schedules, "popopopop");
-  //       const existingScheduleIndex = schedules.findIndex(
-  //         (schedule) => schedule._id === data._id
-  //       );
+  useEffect(() => {
+    if (schedules.length > 0) {
+      socket.on(auth?.user?.profile?.sub, (data) => {
+        console.log(data, schedules, "popopopop");
+        const existingScheduleIndex = schedules.findIndex(
+          (schedule) => schedule._id === data._id
+        );
 
-  //       if (existingScheduleIndex !== -1) {
-  //         var updatedSchedules = [...schedules];
-  //         updatedSchedules[existingScheduleIndex] = {
-  //           ...updatedSchedules[existingScheduleIndex],
-  //           ...data,
-  //         };
-  //       }
-  //       setSchedules(updatedSchedules);
-  //       toastIdRef.current = toast({
-  //         title: `It's Time for ${data.title}`,
-  //         status: "success",
-  //         duration: 5000,
-  //         variant: "left-accent",
-  //         isClosable: true,
-  //       });
-  //     });
-  //   }
-  // });
+        if (existingScheduleIndex !== -1) {
+          var updatedSchedules = [...schedules];
+          updatedSchedules[existingScheduleIndex] = {
+            ...updatedSchedules[existingScheduleIndex],
+            ...data,
+          };
+        }
+        setSchedules(updatedSchedules);
+        toastIdRef.current = toast({
+          title: `It's Time for ${data.title}`,
+          status: "success",
+          duration: 5000,
+          variant: "left-accent",
+          isClosable: true,
+        });
+      });
+    }
+  });
 
   useEffect(() => {
     if (schedules.length > 0 && socket) {
@@ -111,9 +111,9 @@ function App() {
             <Dashboard schedules={schedules} />
           </PrivateRoute>
         </Route>
-        {/* <Route exact path="/profile"> */}
-        {/* <Profile /> */}
-        {/* </Route> */}
+        {/* <Route exact path="/profile">
+          <Profile />
+        </Route> */}
       </Switch>
     </Router>
   );
