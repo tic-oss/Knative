@@ -1,10 +1,10 @@
 require('dotenv').config();
 
 var keycloakConfig = {
-    clientId: 'notes',
+    clientId: 'web_app',
     bearerOnly: true,
     serverUrl: process.env.KC_HOST,
-    realm: 'notes',
+    realm: 'jhipster',
 };
 
 module.exports = {

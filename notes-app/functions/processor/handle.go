@@ -204,43 +204,47 @@ func fetchDataFromDatabase() {
         log.Printf("Error iterating over cursor:", err)
     }
 
-	// Create a map with the key "reminder" and the reminders list as the value
-	var remindersMap = map[string][]*Reminder{"reminder": remindersList}
+	if len(remindersList) > 0 {
+		// Create a map with the key "reminder" and the reminders list as the value
+		var remindersMap = map[string][]*Reminder{"reminder": remindersList}
 
-	// Marshal the map into JSON
-	jsonData, err := json.Marshal(remindersMap)
-	if err != nil {
-		log.Printf("Error marshaling reminders into JSON:", err)
-		return
-	}
+		// Marshal the map into JSON
+		jsonData, err := json.Marshal(remindersMap)
+		if err != nil {
+			log.Printf("Error marshaling reminders into JSON:", err)
+			return
+		}
 
-	// Create a buffer with the JSON data
-	buffer := bytes.NewBuffer(jsonData)
+		// Create a buffer with the JSON data
+		buffer := bytes.NewBuffer(jsonData)
 
-	emitterURLFromEnv, exists := os.LookupEnv("EMITTER_URL")
-	var emitterURL string
-	if exists {
-		emitterURL = emitterURLFromEnv
+		emitterURLFromEnv, exists := os.LookupEnv("EMITTER_URL")
+		var emitterURL string
+		if exists {
+			emitterURL = emitterURLFromEnv
+		} else {
+			emitterURL = defaultEmitterURL
+		}
+
+		// Send a POST request to the specified endpoint
+		response, err := http.Post(emitterURL +"/process", "application/json", buffer)
+		if err != nil {
+			log.Printf("Error sending POST request:", err)
+			return
+		}
+
+		defer response.Body.Close()
+
+		// Check the response status
+		if response.StatusCode != http.StatusOK {
+			log.Printf("Unexpected response status: %v", response.Status)
+			return
+		}
+
+		fmt.Println("Records sent successfully")
 	} else {
-		emitterURL = defaultEmitterURL
+		fmt.Println("No reminders to send.")
 	}
-
-	// Send a POST request to the specified endpoint
-	response, err := http.Post(emitterURL +"/process", "application/json", buffer)
-	if err != nil {
-		log.Printf("Error sending POST request:", err)
-		return
-	}
-
-	defer response.Body.Close()
-
-	// Check the response status
-	if response.StatusCode != http.StatusOK {
-		log.Printf("Unexpected response status: %v", response.Status)
-		return
-	}
-
-	fmt.Println("Records sent successfully")
 
 
 }

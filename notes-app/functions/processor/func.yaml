@@ -3,7 +3,7 @@ name: processor
 runtime: go
 registry: docker.io/raxkumar
 image: docker.io/raxkumar/processor:latest
-imageDigest: sha256:16920be8591abbeeb1e80d914783f04aad881bc570fdb9c644181d1db8af7f91
+imageDigest: sha256:457ac1a0f04922c21ec29b729719f366102baadee2296117c7c37195a0ebc6c7
 created: 2023-11-28T14:30:52.004094318+05:30
 build:
   builder: pack
@@ -12,6 +12,6 @@ run:
   - name: MONGO_URI
     value: mongodb://backend-mongodb-0.backend-mongodb.notes-app:27017
   - name: EMITTER_URL
-    value: http://reminder-function.notes-app.10.99.157.216.sslip.io
+    value: http://reminder-function.notes-app.10.104.27.241.sslip.io
 deploy:
   namespace: notes-app
