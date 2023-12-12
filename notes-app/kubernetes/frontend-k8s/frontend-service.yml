@@ -1,12 +1,12 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: notes-frontend
+  name: new-notes-frontend
   namespace: notes-app
 spec:
   template:
     spec:
       containers:
-        - image: raxkumar/notes-frontend
+        - image: harsha060201/newnotesapp
           ports:
             - containerPort: 80
