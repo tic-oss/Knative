@@ -19,23 +19,11 @@ spec:
             - name: DB_URI
               value: "mongodb://backend-mongodb-0.backend-mongodb.notes-app:27017"
             - name: KC_HOST
-              value: "http://172.17.0.2:30001"
+              value: "http://keycloak.notes-app.10.104.27.241.sslip.io"
             - name: SERVER_PORT
               value: "3001"
             - name: FUNC_PROCESSOR_URL
-              value: "http://processor.notes-app.10.99.157.216.sslip.io"
+              value: "http://processor.notes-app.10.104.27.241.sslip.io"
             - name: FRONTEND_URL
-              value: "http://new-notes-frontend.notes-app.10.97.204.188.sslip.io"
+              value: "http://notes-frontend.notes-app.10.104.27.241.sslip.io"
 
-          readinessProbe:
-            httpGet:
-              path: /test
-              port: http
-            # initialDelaySeconds: 20
-            # periodSeconds: 15
-            # failureThreshold: 6
-          livenessProbe:
-            httpGet:
-              path: /test
-              port: http
-            # initialDelaySeconds: 120

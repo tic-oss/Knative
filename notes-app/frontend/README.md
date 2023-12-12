@@ -57,3 +57,14 @@ The page will reload when you make changes.
 Build the docker image: `docker build -t frontend:latest .`
 
 Start the container: `docker run -d -p 4200:80 frontend:latest`
+
+
+## Add .env file for local development
+
+```
+REACT_APP_PROJECT_NAME=frontend
+REACT_APP_OIDC_AUTHORITY=http://localhost:9080/realms/jhipster
+REACT_APP_OIDC_CLIENT_ID=web_app
+REACT_APP_PROJECT_URL=http://localhost:3000
+REACT_APP_API_BASE_URL=http://localhost:3001
+```
