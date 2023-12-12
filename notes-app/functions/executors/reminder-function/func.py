@@ -2,12 +2,21 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient, UpdateOne
 from bson import ObjectId
 import requests
+import os
 
 app = Flask(__name__)
 
+def get_mongo_uri():
+    # Get the value of the environment variable or use the default value
+    return os.getenv('MONGO_URI', 'mongodb://localhost:27017')
+def get_server_url():
+    # Get the value of the environment variable or use the default value
+    return os.getenv('SERVER_URL', 'http://localhost:3001')
+
 def update_reminders_as_expired(reminder_data_list):
     try:
-        client = MongoClient('mongodb://localhost:27017/')
+        mongo_uri = get_mongo_uri()
+        client = MongoClient(mongo_uri)
         db = client['notes-db']
         reminders_collection = db['reminders']
 
@@ -38,8 +47,8 @@ def process_reminder():
         for reminder in reminders:
             reminder['expired'] = True
 
-
-        api_url = 'http://localhost:3001/emitter'
+        server_url = get_server_url()
+        api_url = server_url +' /emitter'
         response = requests.post(api_url, json={'reminder': reminders})
 
         if response.status_code == 200:

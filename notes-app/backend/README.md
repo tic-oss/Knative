@@ -7,8 +7,8 @@ MONGODB_DATABASE=notes-db
 KC_HOST=http://localhost:9080
 SERVER_PORT=3001
 FRONTEND_URL=http://localhost:3000
+FUNC_PROCESSOR_URL=http://localhost:8080
 ```
-
 
 
 ### Start Application

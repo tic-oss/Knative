@@ -1,8 +1,8 @@
 // uncomment below line when we are running it using "func run"
-// package function
+package function
 
 // uncomment below line when we are running it in localhost, and comment out the above line
-package main
+// package main
 
 import (
 	"context"
@@ -14,6 +14,7 @@ import (
 	"time"
 	"log"
 	"bytes"
+	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -22,6 +23,24 @@ import (
 
 // main function is optional when running it using  "func run"
 func main() {
+	// check ENV variables
+	mongoURIFromEnv, exists := os.LookupEnv("MONGO_URI")
+	var mongoURI string
+	if exists {
+		mongoURI = mongoURIFromEnv
+	} else {
+		mongoURI = defaultMongoURI
+	}
+	fmt.Println("MONGO_URI: "+mongoURI)
+
+	emitterURLFromEnv, exists := os.LookupEnv("EMITTER_URL")
+	var emitterURL string
+	if exists {
+		emitterURL = emitterURLFromEnv
+	} else {
+		emitterURL = defaultEmitterURL
+	}
+	fmt.Println("EMITTER_URL: "+emitterURL)
 	/*
 		The purpose of creating a context with a timeout is to associate a deadline with the request.
 		If the request processing takes longer than the specified timeout, 
@@ -79,13 +98,22 @@ type Reminder struct {
 
 // MongoDB configuration
 const (
-	mongoURI      = "mongodb://localhost:27017" // Update with your MongoDB URI
-	databaseName  = "notes-db"
-	collectionName = "reminders"
+	defaultMongoURI  = "mongodb://localhost:27017"
+	defaultEmitterURL       = "http://localhost:5002"     
+	databaseName  	 = "notes-db"
+	collectionName   = "reminders"
 )
 
 // fetchDataFromDatabase fetches all documents of reminders from the MongoDB database.
 func fetchDataFromDatabase() {
+	// Get the value of the environment variable for mongoURI, or use the default value
+	mongoURIFromEnv, exists := os.LookupEnv("MONGO_URI")
+	var mongoURI string
+	if exists {
+		mongoURI = mongoURIFromEnv
+	} else {
+		mongoURI = defaultMongoURI
+	}
     client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
     if err != nil {
         log.Fatal("Error creating MongoDB client:", err)
@@ -176,8 +204,6 @@ func fetchDataFromDatabase() {
         log.Printf("Error iterating over cursor:", err)
     }
 
-	// ... (your existing code)
-
 	// Create a map with the key "reminder" and the reminders list as the value
 	var remindersMap = map[string][]*Reminder{"reminder": remindersList}
 
@@ -191,8 +217,16 @@ func fetchDataFromDatabase() {
 	// Create a buffer with the JSON data
 	buffer := bytes.NewBuffer(jsonData)
 
+	emitterURLFromEnv, exists := os.LookupEnv("EMITTER_URL")
+	var emitterURL string
+	if exists {
+		emitterURL = emitterURLFromEnv
+	} else {
+		emitterURL = defaultEmitterURL
+	}
+
 	// Send a POST request to the specified endpoint
-	response, err := http.Post("http://localhost:5002/process", "application/json", buffer)
+	response, err := http.Post(emitterURL +"/process", "application/json", buffer)
 	if err != nil {
 		log.Printf("Error sending POST request:", err)
 		return

@@ -6,7 +6,7 @@ const cronJob = () => {
 
         try {
             // Make a GET request to http://localhost:8080 using fetch
-            const response = await fetch('http://localhost:8080');
+            const response = await fetch(process.env.FUNC_PROCESSOR_URL);
 
             // Check if the response status is okay (status code 200)
             if (response.ok) {

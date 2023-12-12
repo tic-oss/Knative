@@ -9,7 +9,6 @@ const keycloakConfig = require("./config/keycloak-config.js").keycloakConfig;
 const privateRouter = require("./router/router.js");
 const publicRouter = require("./router/public.js");
 const cronJob = require("./utility/cronJob.js");
-require("dotenv").config();
 
 /**
     WebSocket is a separate protocol from HTTP, 

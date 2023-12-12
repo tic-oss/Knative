@@ -5,6 +5,9 @@ metadata:
   namespace: notes-app
 spec:
   template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
     spec:
       containers:
       - image: raxkumar/notes-backend
@@ -19,6 +22,11 @@ spec:
           value: "http://172.17.0.2:30001"
         - name: SERVER_PORT
           value: "3001"
+        - name: FUNC_PROCESSOR_URL
+          value: "http://processor.notes-app.10.99.157.216.sslip.io"
+        - name: FRONTEND_URL
+          value: "http://notes-frontend.notes-app.10.99.157.216.sslip.io"
+        
         readinessProbe:
             httpGet:
                 path: /test
