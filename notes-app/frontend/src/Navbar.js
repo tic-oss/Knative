@@ -129,7 +129,8 @@ const Header = ({ socket, schedules, setSchedules }) => {
                       to="/logout"
                       onClick={() => {
                         auth.signoutRedirect({
-                          post_logout_redirect_uri: process.env.REACT_APP_PROJECT_URL,
+                          post_logout_redirect_uri:
+                            process.env.REACT_APP_PROJECT_URL,
                         });
                       }}
                       colorScheme="red"

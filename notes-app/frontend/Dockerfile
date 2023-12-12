@@ -4,8 +4,8 @@ FROM node:alpine as builder
 # Set the working directory
 WORKDIR /app
 
-# Copy the package.json and package-lock.json to install dependencies
-COPY package.json package-lock.json ./
+# Copy the package*.json to install dependencies
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
