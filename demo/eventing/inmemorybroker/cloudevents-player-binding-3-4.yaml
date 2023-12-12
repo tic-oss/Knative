@@ -1,0 +1,14 @@
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: ce-player-binding-3-4
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: example-broker
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: cloudevents-player-3
