@@ -133,3 +133,5 @@ dist
 **/package-lock.json
 
 **/temp.txt
+
+**/myvenv
