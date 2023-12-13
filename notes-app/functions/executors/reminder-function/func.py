@@ -1,10 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, Request, jsonify
 from pymongo import MongoClient, UpdateOne
 from bson import ObjectId
 import requests
+from parliament import Context
 import os
-
-app = Flask(__name__)
 
 def get_mongo_uri():
     # Get the value of the environment variable or use the default value
@@ -13,16 +12,15 @@ def get_server_url():
     # Get the value of the environment variable or use the default value
     return os.getenv('SERVER_URL', 'http://localhost:3001')
 
-def update_reminders_as_expired(reminder_data_list):
+def update_reminders_as_expired(reminder_data_list, client):
     try:
-        mongo_uri = get_mongo_uri()
-        client = MongoClient(mongo_uri)
         db = client['notes-db']
         reminders_collection = db['reminders']
 
         update_operations = []
         for reminder_data in reminder_data_list:
-            query = {'_id': ObjectId(reminder_data['_id'])}
+            print ("iddddd",ObjectId(reminder_data['_id']['$oid']))
+            query = {'_id': ObjectId(reminder_data['_id']['$oid'])}
             update_operations.append(UpdateOne(query, {'$set': {'expired': True}}))
 
         result = reminders_collection.bulk_write(update_operations)
@@ -31,24 +29,18 @@ def update_reminders_as_expired(reminder_data_list):
 
     except Exception as e:
         print('Error updating reminders as expired:', str(e))
-    finally:
-        client.close()
 
-@app.route('/',methods=['GET'])
-def hello():
-    return "hello world"
-
-@app.route('/process', methods=['POST'])
-def process_reminder():
+def process_reminder(request: Request):
     try:
         reminders = request.json.get('reminder', [])
-        update_reminders_as_expired(reminders)
+        print(reminders)
+        mongo_uri=get_mongo_uri()
+        update_reminders_as_expired(reminders, MongoClient(mongo_uri))
 
         for reminder in reminders:
             reminder['expired'] = True
-
-        server_url = get_server_url()
-        api_url = server_url +' /emitter'
+        api_url = get_server_url()+'/emitter'
+        # api_url = 'http://localhost:3001/emitter'
         response = requests.post(api_url, json={'reminder': reminders})
 
         if response.status_code == 200:
@@ -62,5 +54,11 @@ def process_reminder():
         print('Error processing reminders:', str(e))
         return jsonify({'error': 'Internal Server Error'}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002)
+def main(context: Context):
+    print(context.request.method,context.request.path)
+    if context.request.method == "GET":
+        return "hello world", 200
+    elif context.request.method == "POST":
+        return process_reminder(context.request)
+    else:
+        return "Invalid endpoint or method", 400

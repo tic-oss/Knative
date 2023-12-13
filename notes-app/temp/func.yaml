@@ -1,10 +1,10 @@
 specVersion: 0.35.0
-name: reminder-function
+name: temp
 runtime: python
 registry: harsha060201
-image: harsha060201/reminder-function:latest
-imageDigest: sha256:4abd490859478bddff1ee28735349288cb14ff49f48725075b03fe6a13447036
-created: 2023-12-03T13:17:12.139495072+05:30
+image: harsha060201/temp:latest
+imageDigest: sha256:1478b908e2dc958feadc639c24eee3b0f25dad2bcee860c46d07acba62694bcb
+created: 2023-12-12T22:41:47.446460608+05:30
 build:
   builder: pack
 run:
