@@ -227,7 +227,7 @@ func fetchDataFromDatabase() {
 		}
 
 		// Send a POST request to the specified endpoint
-		response, err := http.Post(emitterURL +"/process", "application/json", buffer)
+		response, err := http.Post(emitterURL, "application/json", buffer)
 		if err != nil {
 			log.Printf("Error sending POST request:", err)
 			return

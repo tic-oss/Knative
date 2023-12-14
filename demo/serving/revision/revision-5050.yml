@@ -14,7 +14,7 @@ spec:
               value: "REVISION-00002"
   traffic:
   - latestRevision: true
-    percent: 50
+    percent: 75
   - latestRevision: false
-    percent: 50
+    percent: 25
     revisionName: revision-00001

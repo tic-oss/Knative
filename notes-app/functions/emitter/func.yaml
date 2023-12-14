@@ -1,9 +1,9 @@
 specVersion: 0.35.0
-name: temp
+name: emitter
 runtime: python
-registry: harsha060201
-image: harsha060201/temp:latest
-imageDigest: sha256:1478b908e2dc958feadc639c24eee3b0f25dad2bcee860c46d07acba62694bcb
+registry: raxkumar
+image: raxkumar/emitter:latest
+imageDigest: sha256:17067a917701df2b7784a798eb92258623e7a5509ad38c7c2d28e069ccfab372
 created: 2023-12-12T22:41:47.446460608+05:30
 build:
   builder: pack
@@ -12,6 +12,6 @@ run:
   - name: MONGO_URI
     value: mongodb://backend-mongodb-0.backend-mongodb.notes-app:27017
   - name: SERVER_URL
-    value: http://notes-backend.notes-app.10.99.157.216.sslip.io
+    value: http://notes-backend.notes-app.10.104.27.241.sslip.io
 deploy:
   namespace: notes-app

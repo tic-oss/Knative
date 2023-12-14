@@ -44,9 +44,9 @@ def payload_print(req: Request) -> str:
 
             # API CALL
             api_url = get_server_url()+'/emitter'
-            for reminder in reminders:
+            for reminder in reminder_data_list['reminder']:
                 reminder['expired'] = True
-            response = requests.post(api_url, json={'reminder': reminders})
+            response = requests.post(api_url, json={'reminder': reminder_data_list['reminder']})
             if response.status_code == 200:
                 print('Reminders processed successfully')
                 return 'success'
