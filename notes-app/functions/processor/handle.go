@@ -21,8 +21,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// main function is optional when running it using  "func run"
-func main() {
+// init function is to be change to main, when running it 'localhost'
+// func main() {
+func init() {
 	// check ENV variables
 	mongoURIFromEnv, exists := os.LookupEnv("MONGO_URI")
 	var mongoURI string
@@ -59,28 +60,28 @@ func main() {
 
 	// Run Handle function every 10 seconds in a goroutine (cron)
 	
-	// go func() {
-	// 	ticker := time.NewTicker(10 * time.Second)
-	// 	defer ticker.Stop()
+	go func() {
+		ticker := time.NewTicker(10 * time.Second)
+		defer ticker.Stop()
 
-	// 	for {
-	// 		select {
-	// 		case <-ticker.C:
-	// 			ctx := context.Background()
-	// 			Handle(ctx, nil, nil) // You can pass nil or mock objects here
-	// 		}
-	// 	}
-	// }()
+		for {
+			select {
+			case <-ticker.C:
+				ctx := context.Background()
+				Handle(ctx, nil, nil) // You can pass nil or mock objects here
+			}
+		}
+	}()
 
-	/*
-	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		// You can create a context here if needed
-		ctx, cancel := context.WithTimeout(req.Context(), 10*time.Second)
-		defer cancel()
+	
+	// http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+	// 	// You can create a context here if needed
+	// 	ctx, cancel := context.WithTimeout(req.Context(), 10*time.Second)
+	// 	defer cancel()
 
-		Handle(ctx, res, req)
-	})
-	*/
+	// 	Handle(ctx, res, req)
+	// })
+	
 	fmt.Println("Running on host port 8080")
     log.Fatal(http.ListenAndServe(":8080", nil))
 }

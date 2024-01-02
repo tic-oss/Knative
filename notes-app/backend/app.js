@@ -114,7 +114,7 @@ privateRouter(router);
 publicRouter(public);
 
 // run cron Job
-cronJob();
+// cronJob();
 
 const PORT = process.env.SERVER_PORT;
 
