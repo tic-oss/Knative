@@ -3,7 +3,7 @@ name: processor
 runtime: go
 registry: docker.io/raxkumar
 image: docker.io/raxkumar/processor:latest
-imageDigest: sha256:f5087522b5f8f06543cad13fd6b91f1aab037bfd14e067270d907c54e84b3a8f
+imageDigest: sha256:e5a13176d806500fda5807fd53bcb11d7ecf08d032feaec094e8ebc1fd6131e7
 created: 2023-11-28T14:30:52.004094318+05:30
 build:
   builder: pack
@@ -15,3 +15,6 @@ run:
     value: http://emitter.notes-app.10.104.27.241.sslip.io
 deploy:
   namespace: notes-app
+  options:
+    scale:
+      min: 1
