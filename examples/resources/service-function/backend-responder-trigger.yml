@@ -1,0 +1,15 @@
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: example-backend-responder-trigger
+spec:
+  broker: kafka-broker
+  filter:
+    attributes:
+      type: components
+  subscriber:
+    ref:
+     apiVersion: serving.knative.dev/v1
+     kind: Service
+     name: responder
