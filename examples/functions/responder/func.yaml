@@ -1,0 +1,12 @@
+specVersion: 0.35.0
+name: responder
+runtime: node
+registry: docker.io/raxkumar
+image: docker.io/raxkumar/responder:latest
+imageDigest: sha256:ff07e6cf97bd68ebd56484c622565c95475d814ec7183fd8d74dbc4b9cb51f9a
+created: 2023-04-20T09:42:55.307479+02:00
+invoke: cloudevent
+build:
+  builder: pack
+deploy:
+  namespace: default

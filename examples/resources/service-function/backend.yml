@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: example-backend
+spec:
+  template:
+    spec:
+      containers:
+        - image: raxkumar/knative-example-backend:latest
+          ports:
+            - containerPort: 3333
+          env:
+            # - name: K_SINK
+            #   value: "http://kafka-broker-ingress.knative-eventing.svc.cluster.local/default/kafka-broker"
