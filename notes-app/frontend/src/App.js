@@ -7,6 +7,8 @@ import { useToast } from "@chakra-ui/react";
 import Dashboard from "./Dashboard.js";
 import PrivateRoute from "./config/auth/privateRoute.js";
 import { useAuth } from "react-oidc-context";
+import Home from "./Home.js";
+import "./App.css";
 
 const socket = socketIO.connect(process.env.REACT_APP_API_BASE_URL);
 function App() {
@@ -99,23 +101,28 @@ function App() {
   }, [schedules, socket, auth]);
 
   return (
-    <Router className="flex h-screen">
-      <Navbar
-        socket={socket}
-        schedules={schedules}
-        setSchedules={setSchedules}
-      />
-      <Switch>
-        <Route exact path="/dashboard">
-          <PrivateRoute>
-            <Dashboard schedules={schedules} />
-          </PrivateRoute>
-        </Route>
-        {/* <Route exact path="/profile">
+    <div className="app-container">
+      <Router className="flex h-screen">
+        <Navbar
+          socket={socket}
+          schedules={schedules}
+          setSchedules={setSchedules}
+        />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/dashboard">
+            <PrivateRoute>
+              <Dashboard schedules={schedules} />
+            </PrivateRoute>
+          </Route>
+          {/* <Route exact path="/profile">
           <Profile />
         </Route> */}
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
