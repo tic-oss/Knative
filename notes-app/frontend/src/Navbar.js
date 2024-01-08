@@ -87,7 +87,7 @@ const Header = ({ socket, schedules, setSchedules }) => {
                 </Text>
               </Link>
 
-              <Link to="/profile">
+              {/* <Link to="/profile">
                 <Text
                   fontSize="md"
                   color="#ffffff"
@@ -98,13 +98,13 @@ const Header = ({ socket, schedules, setSchedules }) => {
                 >
                   Profile
                 </Text>
-              </Link>
+              </Link> */}
             </>
           )}
         </Flex>
 
         <Flex alignItems="center">
-          {isloggedIn ? (
+          {isloggedIn && (
             <>
               <Button colorScheme="blue" size="sm" mr={4} onClick={openModal}>
                 + Create New Reminder
@@ -144,16 +144,17 @@ const Header = ({ socket, schedules, setSchedules }) => {
                 </PopoverContent>
               </Popover>
             </>
-          ) : (
-            <Button
-              colorScheme="blue"
-              size="sm"
-              mr={4}
-              onClick={() => auth.signinRedirect()}
-            >
-              Sign In
-            </Button>
           )}
+          {/* // : (
+          //   <Button
+          //     colorScheme="blue"
+          //     size="sm"
+          //     mr={4}
+          //     onClick={() => auth.signinRedirect()}
+          //   >
+          //     Sign In
+          //   </Button>
+          // )} */}
         </Flex>
       </Flex>
 
