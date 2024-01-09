@@ -1,0 +1,14 @@
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: notes-backend-sink-binding
+spec:
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: notes-backend
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: kafka-broker
