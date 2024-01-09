@@ -1,0 +1,19 @@
+specVersion: 0.35.0
+name: processor-ce
+runtime: go
+registry: docker.io/raxkumar
+image: docker.io/raxkumar/processor-ce:latest
+imageDigest: sha256:9dedaae76962fc4ed834a171b2a48b839455745280079c5e33e5b16ae646b4b9
+created: 2024-01-08T14:56:32.028165886+05:30
+invoke: cloudevent
+build:
+  builder: pack
+run:
+  envs:
+  - name: MONGO_URI
+    value: mongodb://backend-mongodb-0.backend-mongodb.notes-app:27017
+deploy:
+  namespace: default
+  options:
+    scale:
+      min: 1

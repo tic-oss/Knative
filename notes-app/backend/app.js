@@ -92,7 +92,7 @@ app.post("/emitter", (req, res) => {
   try {
     // Assuming you get the list of reminder objects in the request body
     const reminderList = req.body?.reminder;
-    
+
     // Assuming each reminder in the list has a unique '_id' property
     reminderList.forEach((reminder) => {
       // Emitting data with the 'user_id' as the event name
@@ -114,7 +114,7 @@ privateRouter(router);
 publicRouter(public);
 
 // run cron Job
-// cronJob();
+cronJob();
 
 const PORT = process.env.SERVER_PORT;
 
