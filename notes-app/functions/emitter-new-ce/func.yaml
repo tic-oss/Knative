@@ -3,7 +3,7 @@ name: emitter-new-ce
 runtime: python
 registry: docker.io/harsha060201
 image: docker.io/harsha060201/emitter-new-ce:latest
-imageDigest: sha256:fd10589587b8326cbd268786463de3fcb0e570005a02e8ad556cbf189663bc51
+imageDigest: sha256:19d9223970be232d36fb5994ae693ff7036b50a7cfde917913cc151a598dc5e0
 created: 2024-01-02T16:48:55.435206894+05:30
 invoke: cloudevent
 build:

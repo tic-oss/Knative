@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - image: raxkumar/knative-example-backend:latest
+        - image: harsha060201/knative-example-backend:latest
           ports:
             - containerPort: 3333
           env:

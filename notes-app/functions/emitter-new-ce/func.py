@@ -2,7 +2,8 @@ from parliament import Context, event
 from pymongo import MongoClient, UpdateOne
 import os
 from bson import ObjectId
-
+from cloudevents.conversion import to_structured
+from cloudevents.http import CloudEvent
 
 def get_mongo_uri():
     # Get the value of the environment variable or use the default value
@@ -23,9 +24,9 @@ def update_db(reminder_data_list):
         update_operations.append(UpdateOne(query, {'$set': {'expired': True}}))
 
     print("update records", update_operations)
-    result = reminders_collection.bulk_write(update_operations)
+    # result = reminders_collection.bulk_write(update_operations)
 
-    print(f'{result.modified_count} reminders updated as expired')
+    # print(f'{result.modified_count} reminders updated as expired')
 
     for reminder in reminder_data_list['reminder']:
         reminder['expired'] = True
@@ -44,4 +45,15 @@ def main(context: Context):
 
     # The return value here will be applied as the data attribute
     # of a CloudEvent returned to the function invoker
-    return update_db(context.cloud_event.data)
+    reminder_data= update_db(context.cloud_event.data)
+    attributes = {
+    "type": "emitter",
+    "source": "emitter",
+    }
+    event = CloudEvent(attributes, reminder_data)
+
+    # Creates the HTTP request representation of the CloudEvent in structured content mode
+    headers, event_data = to_structured(event)
+
+    return event_data
+
