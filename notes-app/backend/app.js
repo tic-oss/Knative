@@ -87,8 +87,8 @@ app.post("/", function (req, res) {
   // res.sendFile(path.join(__dirname, "index.html"));
   try {
     // Assuming you get the list of reminder objects in the request body
-    const reminderList = req.body?.data.reminder;
-
+    const reminderList = req.body?.cloud_event.data;
+    console.log(req.body);
     // Assuming each reminder in the list has a unique '_id' property
     reminderList.forEach((reminder) => {
       // Emitting data with the 'user_id' as the event name

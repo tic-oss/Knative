@@ -2,15 +2,14 @@
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: backend-processor-ce-trigger
-  namespace: notes-app
+  name: processor-ce-emitter-ce-trigger
 spec:
   broker: kafka-broker
   filter:
     attributes:
-      type: Trigger
+      type: Reminders
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service
-      name: processor-ce
+      name: emitter-ce

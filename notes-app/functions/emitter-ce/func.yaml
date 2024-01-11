@@ -1,10 +1,10 @@
 specVersion: 0.35.0
-name: processor-ce
-runtime: go
+name: emitter-ce
+runtime: python
 registry: docker.io/harsha060201
-image: docker.io/harsha060201/processor-ce:latest
-imageDigest: sha256:1e3ade76c4f3dedff58289f21afeff7c3f61593ba061bb76bba8431001f1b897
-created: 2024-01-08T14:56:32.028165886+05:30
+image: docker.io/harsha060201/emitter-ce:latest
+imageDigest: sha256:2d8d415a6e083a68669b311dbfa8dae3d084a79c9965d070307054b71e139441
+created: 2024-01-02T16:48:55.435206894+05:30
 invoke: cloudevent
 build:
   builder: pack

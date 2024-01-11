@@ -7,15 +7,17 @@ package function
 import (
 	"context"
 	"fmt"
+
 	// "encoding/json"
 	// "io"
 	// "net/http"
 	// "strings"
-	"time"
 	"log"
+	"time"
+
 	// "bytes"
-	"os"
 	"encoding/json"
+	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -48,18 +50,18 @@ import (
 // 	fmt.Println("EMITTER_URL: "+emitterURL)
 // 	/*
 // 		The purpose of creating a context with a timeout is to associate a deadline with the request.
-// 		If the request processing takes longer than the specified timeout, 
+// 		If the request processing takes longer than the specified timeout,
 // 		the context will be canceled, and any operations associated with it will be interrupted.
 
 // 		context.Background(), which creates a background context without a timeout or deadline.
 // 	*/
-	
+
 // 	// Start the HTTP server
 // 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 // 	})
 
 // 	// Run Handle function every 10 seconds in a goroutine (cron)
-	
+
 // 	go func() {
 // 		ticker := time.NewTicker(10 * time.Second)
 // 		defer ticker.Stop()
@@ -72,7 +74,7 @@ import (
 // 			}
 // 		}
 // 	}()
-	
+
 // 	fmt.Println("Running on host port 8080")
 // 	log.Fatal(http.ListenAndServe(":8080", nil))
 // }
@@ -106,6 +108,7 @@ func fetchDataFromDatabase() ([]*Reminder, error) {
 	} else {
 		mongoURI = defaultMongoURI
 	}
+	fmt.Println("mongo uri",mongoURI)
     client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
     if err != nil {
         log.Fatal("Error creating MongoDB client:", err)
