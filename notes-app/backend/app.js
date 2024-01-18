@@ -87,15 +87,19 @@ app.post("/", function (req, res) {
   // res.sendFile(path.join(__dirname, "index.html"));
   try {
     // Assuming you get the list of reminder objects in the request body
-    const reminderList = req.body?.cloud_event.data;
-    console.log(req.body);
-    // Assuming each reminder in the list has a unique '_id' property
-    reminderList.forEach((reminder) => {
-      // Emitting data with the 'user_id' as the event name
-      io.emit(reminder.user_id, reminder);
-    });
+    console.log("req", req);
+    if (req.body) {
+      console.log("body", req.body);
+      const reminderList = req.body;
+      // console.log(req.body);
+      // Assuming each reminder in the list has a unique '_id' property
+      reminderList.forEach((reminder) => {
+        // Emitting data with the 'user_id' as the event name
+        io.emit(reminder.user_id, reminder);
+      });
 
-    res.send("Message sent to the specified user");
+      res.send("Message sent to the specified user");
+    }
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");

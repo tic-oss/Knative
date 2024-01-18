@@ -13,3 +13,4 @@ spec:
       apiVersion: serving.knative.dev/v1
       kind: Service
       name: emitter-ce
+      namespace: notes-app

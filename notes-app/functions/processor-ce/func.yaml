@@ -3,7 +3,7 @@ name: processor-ce
 runtime: go
 registry: docker.io/harsha060201
 image: docker.io/harsha060201/processor-ce:latest
-imageDigest: sha256:1e3ade76c4f3dedff58289f21afeff7c3f61593ba061bb76bba8431001f1b897
+imageDigest: sha256:a446d7ebc74cb6976cd894bff57eeb03d459dd5b3bc60c8ee22b249dabc11b9a
 created: 2024-01-08T14:56:32.028165886+05:30
 invoke: cloudevent
 build:
