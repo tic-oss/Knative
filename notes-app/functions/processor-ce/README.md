@@ -16,7 +16,7 @@ curl -v -X POST -d '{"message": "hello"}' \
   -H'Ce-subject: Echo content' \
   -H'Ce-type: MyEvent' \
   -H'Ce-specversion: 1.0' \
-  http://localhost:8080/
+  http://processor-ce.notes-app.10.110.225.129.sslip.io/
 ```
 
 For more, see [the complete documentation]('https://github.com/knative/func/tree/main/docs')

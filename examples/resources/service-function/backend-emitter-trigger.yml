@@ -10,6 +10,6 @@ spec:
       type: components
   subscriber:
     ref:
-     apiVersion: serving.knative.dev/v1
-     kind: Service
-     name: responder
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: emitter-ce

@@ -83,28 +83,47 @@ var public = express.Router();
 app.use("/api", keycloak.protect(), router);
 app.use(public);
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
-// Assuming you have defined the 'io' object somewhere in your code
-app.post("/emitter", (req, res) => {
+app.post("/", function (req, res) {
+  // res.sendFile(path.join(__dirname, "index.html"));
   try {
     // Assuming you get the list of reminder objects in the request body
-    const reminderList = req.body?.reminder;
+    console.log("req", req);
+    if (req.body) {
+      console.log("body", req.body);
+      const reminderList = req.body;
+      // console.log(req.body);
+      // Assuming each reminder in the list has a unique '_id' property
+      reminderList.forEach((reminder) => {
+        // Emitting data with the 'user_id' as the event name
+        io.emit(reminder.user_id, reminder);
+      });
 
-    // Assuming each reminder in the list has a unique '_id' property
-    reminderList.forEach((reminder) => {
-      // Emitting data with the 'user_id' as the event name
-      io.emit(reminder.user_id, reminder);
-    });
-
-    res.send("Message sent to the specified user");
+      res.send("Message sent to the specified user");
+    }
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
   }
 });
+
+// // Assuming you have defined the 'io' object somewhere in your code
+// app.post("/emitter", (req, res) => {
+//   try {
+//     // Assuming you get the list of reminder objects in the request body
+//     const reminderList = req.body?.reminder;
+
+//     // Assuming each reminder in the list has a unique '_id' property
+//     reminderList.forEach((reminder) => {
+//       // Emitting data with the 'user_id' as the event name
+//       io.emit(reminder.user_id, reminder);
+//     });
+
+//     res.send("Message sent to the specified user");
+//   } catch (error) {
+//     console.error("Error:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
 
 // Assuming you have body-parser middleware or similar to parse JSON in the request body
 app.use(express.json());
