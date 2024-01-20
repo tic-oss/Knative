@@ -7,6 +7,6 @@ spec:
   template:
     spec:
       containers:
-        - image: harsha060201/notes-frontend
+        - image: raxkumar/notes-frontend
           ports:
             - containerPort: 80

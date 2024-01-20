@@ -1,9 +1,9 @@
 specVersion: 0.35.0
 name: emitter-ce
 runtime: python
-registry: docker.io/harsha060201
-image: docker.io/harsha060201/emitter-ce:latest
-imageDigest: sha256:1af3431b8ce27f8c32b037bbe36ace6c609e3d5a91a164825d717b5befea97ab
+registry: docker.io/raxkumar
+image: docker.io/raxkumar/emitter-ce:latest
+imageDigest: sha256:4d4d40228180bfdfbe71feada414b05da18277463b8e10d9aa933d51cdbad3dd
 created: 2024-01-02T16:48:55.435206894+05:30
 invoke: cloudevent
 build:

@@ -52,10 +52,13 @@ def main(context: Context):
     "type": "services-res",
     "source": "emitter-ce",
     }
+
+    # Set the content type to application/json
+    attributes["datacontenttype"] = "application/json"
+
     event = CloudEvent(attributes, reminder_data)
     print("event:",event)
     # Creates the HTTP request representation of the CloudEvent in structured content mode
     # headers, event_data = to_structured(event)
     # print("event:",event_data)
     return event
-
