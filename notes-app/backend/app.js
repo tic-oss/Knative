@@ -63,10 +63,11 @@ app.use(
 // Call the database connectivity function
 db();
 
+// Assuming you have body-parser middleware or similar to parse JSON in the request body
+app.use(express.json());
+
 // Enable Cross-Origin Resource Sharing (CORS) middleware
 app.use(cors());
-
-app.use(express.json());
 
 // Middleware to set Access-Control-Expose-Headers globally(allows custom headers)
 app.use((req, res, next) => {
@@ -87,17 +88,15 @@ app.post("/", function (req, res) {
   // res.sendFile(path.join(__dirname, "index.html"));
   try {
     // Assuming you get the list of reminder objects in the request body
-    console.log("req", req);
     if (req.body) {
-      console.log("body", req.body);
+      console.log(`----------------Logging request body------------------`);
+      console.log(req.body);
       const reminderList = req.body;
-      // console.log(req.body);
       // Assuming each reminder in the list has a unique '_id' property
       reminderList.forEach((reminder) => {
         // Emitting data with the 'user_id' as the event name
         io.emit(reminder.user_id, reminder);
       });
-
       res.send("Message sent to the specified user");
     }
   } catch (error) {
@@ -105,6 +104,8 @@ app.post("/", function (req, res) {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 
 // // Assuming you have defined the 'io' object somewhere in your code
 // app.post("/emitter", (req, res) => {
@@ -125,8 +126,6 @@ app.post("/", function (req, res) {
 //   }
 // });
 
-// Assuming you have body-parser middleware or similar to parse JSON in the request body
-app.use(express.json());
 
 //call routing
 privateRouter(router);

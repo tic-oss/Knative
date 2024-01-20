@@ -1,9 +1,9 @@
 specVersion: 0.35.0
 name: processor-ce
 runtime: go
-registry: docker.io/harsha060201
-image: docker.io/harsha060201/processor-ce:latest
-imageDigest: sha256:a446d7ebc74cb6976cd894bff57eeb03d459dd5b3bc60c8ee22b249dabc11b9a
+registry: docker.io/raxkumar
+image: docker.io/raxkumar/processor-ce:latest
+imageDigest: sha256:7b8c212ed0ca602618ceba8e005330187d4a3e27e5d3615d0e435c3078d149e4
 created: 2024-01-08T14:56:32.028165886+05:30
 invoke: cloudevent
 build:
