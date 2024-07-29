@@ -46,3 +46,7 @@ helm uninstall kafka-ui
 ### References:
 
 1. https://docs.kafka-ui.provectus.io/configuration/helm-charts/quick-start
+
+### How to filter :
+
+value != null && !(value instanceof Map && value.isEmpty())

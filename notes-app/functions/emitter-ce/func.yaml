@@ -3,7 +3,7 @@ name: emitter-ce
 runtime: python
 registry: docker.io/raxkumar
 image: docker.io/raxkumar/emitter-ce:latest
-imageDigest: sha256:4d4d40228180bfdfbe71feada414b05da18277463b8e10d9aa933d51cdbad3dd
+imageDigest: sha256:ccb595247c3c337472454d22ec59cb3976a574ebb25a45be5f1242b8b36cd518
 created: 2024-01-02T16:48:55.435206894+05:30
 invoke: cloudevent
 build:

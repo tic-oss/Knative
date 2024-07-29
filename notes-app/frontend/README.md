@@ -54,7 +54,7 @@ The page will reload when you make changes.
 
 ## Containerization
 
-Build the docker image: `docker build -t frontend:latest .`
+Build the docker image: `docker build -t raxkumar/notes-frontend:latest .`
 
 Start the container: `docker run -d -p 4200:80 frontend:latest`
 

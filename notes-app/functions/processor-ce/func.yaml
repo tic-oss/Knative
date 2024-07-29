@@ -3,7 +3,7 @@ name: processor-ce
 runtime: go
 registry: docker.io/raxkumar
 image: docker.io/raxkumar/processor-ce:latest
-imageDigest: sha256:7b8c212ed0ca602618ceba8e005330187d4a3e27e5d3615d0e435c3078d149e4
+imageDigest: sha256:6dc94e6bbca3c576d4e945782a4a1ca096f17bd8bfc345318daf768c41c22db9
 created: 2024-01-08T14:56:32.028165886+05:30
 invoke: cloudevent
 build:
